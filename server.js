@@ -22,6 +22,12 @@ app.get('/', (req, res) => {
 const languagesController = require('./controllers/languages_controller.js')
 app.use('/languages', languagesController)
 
+const countriesControlller = require('./controllers/countries_controller')
+app.use("/countries", countriesControlller)
+
+
+
+
 // LISTEN
 app.listen(PORT, () => {
   console.log('Greetings! From port: ', PORT);

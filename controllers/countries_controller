@@ -1,0 +1,91 @@
+const express = require("express")
+const countries = express.Router()
+const Country = require("../models/country.js")
+
+
+module.exports = countries
+
+
+
+countries.get('/seed', (req, res) => {
+    Country.insertMany([
+        {
+            'name': "ecuador",
+            "capital": "Quito",
+            "population": 22222,
+            "language": "Spanish"
+        },
+        {
+            'name': "peru",
+            "capital": "Cusco",
+            "population": 3333330,
+            "language": "Spanish"
+        },{
+            'name': "usa",
+            "capital": "Washington",
+            "population": 22222222220,
+            "language": "English - non-oficial"
+        },{
+            'name': "canada",
+            "capital": "sdad",
+            "population": 44444444440,
+            "language": "French"
+        },{
+            'name': "italia",
+            "capital": "dsfdsf",
+            "population": 4353533330,
+            "language": "italy"
+        },{
+            'name': "china",
+            "capital": "hjsbas",
+            "population": 45354350,
+            "language": "Chinese"
+        },{
+            'name': "rusia",
+            "capital": "Vsdfddsf",
+            "population": 324324320,
+            "language": "Russian"
+        },{
+            'name': "japam",
+            "capital": "",
+            "population": 354435345430,
+            "language": "Japanese"
+        },{
+            'name': "korea",
+            "capital": "",
+            "population": 43534530,
+            "language": "Korean"
+        },{
+            'name': "colombia",
+            "capital": "Bogota",
+            "population": 34320,
+            "language": "Soanish"
+        },
+    ]
+    )
+        .then(createdCountries => {
+            res.json({
+                message: "Seed successful!"
+            })
+        })
+})
+
+// Index:
+countries.get('/', (req, res) => {
+    Country.find()
+        .then(foundCountries => {
+            res.json(foundCountries)
+        })
+})
+
+// Show:
+countries.get('/:name', (req, res) => {
+    Country.findOne({ name: req.params.name.toLowerCase() })
+        .then(foundCountry => {
+            res.json(foundCountry)
+        })
+})
+
+
+
+
